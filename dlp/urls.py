@@ -19,5 +19,7 @@ from questions import views
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', views.list_questionnaires)
+    url(r'^$', views.list_questionnaires),
+    url(r'^questionnaires/(?P<pk>\d+)/$', views.questionnaire),
+    url(r'^theform/$', views.the_form),
 ]

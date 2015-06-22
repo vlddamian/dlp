@@ -11,7 +11,7 @@
     <ul>
         {% for q in questionnaires %}
 
-            <li>{{q}}</li>
+            <li><a href = "/questionnaires/{{q.pk}}">{{q}}</a></li>
 
         {%endfor%}
     </ul>

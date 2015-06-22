@@ -1,0 +1,12 @@
+<form action="/your-name/" method = "post">
+
+    {%csrf_token%}
+
+    {%for question in page_form%}
+
+        {{question_class}}
+
+    {%endfor%}
+    <input type = "submit" value = "Submit"/>
+
+</form>
