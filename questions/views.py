@@ -31,6 +31,11 @@ def next(request):
                  request.POST.keys())
     selected_answer_ids = map(lambda x : int(x.split("_")[1]), answers)
 
+    for selected_answer_id in selected_answer_ids:
+        selected_answer = Answer.objects.get(pk = selected_answer_id)
+        UserAnswer.objects.create(answer = selected_answer,
+                                  questionnaire = None,
+                                  session_id = request.session.session_key)
 
 
     return render(request, "page.html")
