@@ -1,9 +1,7 @@
 
 
-<form action="/next/" method = "post">
+<form action="/next/{{questionnaire.pk}}/{{page.pk}}" method = "post">
     {%csrf_token%}
-
-    <input type = "text" name = "the_text">
 
     <h3>{{page.name}}</h3>
     {%for question in questions%}
