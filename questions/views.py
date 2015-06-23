@@ -1,10 +1,9 @@
-from django.forms.models import modelformset_factory
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 
 from .models import *
 # Create your views here.
-from questions.forms import PageForm, QuestionForm
+from questions.forms import PageResponseForm
 
 
 def list_questionnaires(request):
@@ -21,16 +20,17 @@ def questionnaire(request, pk):
                   {"questionnaire": questionnaire})
 
 
-def the_form(request):
-    PageFormSet = modelformset_factory(Question, exclude=[],
-                                       extra=0,
-                                     formset=PageForm)
-    QuestionFormSet = modelformset_factory(Answer, exclude=[],
-                                      formset=QuestionForm)
+def page(request, page_id):
+   page = Page.objects.get(pk = page_id)
+   questions = page.questions.all()
+   return render(request, "page.html", {"page": page,
+                                        "questions":questions})
 
-    page_form = PageFormSet(page_id = 1)
+def next(request):
+    answers = filter(lambda x : x.startswith("answer"),
+                 request.POST.keys())
+    selected_answer_ids = map(lambda x : int(x.split("_")[1]), answers)
 
-    # import ipdb;ipdb.set_trace()
 
-    return render(request, "name.html", {"page_form": page_form,
-                                         "question_class":QuestionFormSet})
+
+    return render(request, "page.html")

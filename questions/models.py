@@ -9,12 +9,12 @@ class Question(models.Model):
 
 class Answer(models.Model):
     answer_text = models.CharField(max_length=120)
-    question = models.ForeignKey(Question)
+    question = models.ForeignKey(Question, related_name="answers")
     is_correct = models.BooleanField()
     score = models.IntegerField()
 
     def __unicode__(self):
-        return "Answer: {}".format(self.answer_text)
+        return "{}".format(self.answer_text)
 
 class Page(models.Model):
     questions = models.ManyToManyField(Question, through = "PageQuestion")
@@ -40,3 +40,13 @@ class PageQuestion(models.Model):
     page = models.ForeignKey(Page)
     question = models.ForeignKey(Question)
     order = models.IntegerField()
+
+class UserAnswer(models.Model):
+    session_id = models.CharField(max_length=120)
+    answer = models.ForeignKey(Answer)
+    questionnaire = models.ForeignKey(Questionnaire, null=True)
+
+
+
+
+

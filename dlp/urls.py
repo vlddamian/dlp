@@ -21,5 +21,6 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', views.list_questionnaires),
     url(r'^questionnaires/(?P<pk>\d+)/$', views.questionnaire),
-    url(r'^theform/$', views.the_form),
+    url(r'^page/(?P<page_id>\d+)/$', views.page),
+    url(r'^next/', views.next)
 ]

@@ -1,0 +1,25 @@
+
+
+<form action="/next/" method = "post">
+    {%csrf_token%}
+
+    <input type = "text" name = "the_text">
+
+    <h3>{{page.name}}</h3>
+    {%for question in questions%}
+    <ul>
+        <li>
+            {{question.question_text}}
+            <ul>
+                {%for answer in question.answers.all%}
+                <li><input type = "checkbox" name = "answer_{{answer.pk}}">{{answer}}</li>
+                {%endfor%}
+            </ul>
+        </li>
+    </ul>
+
+    {%endfor%}
+
+    <input type = "submit" value = "Next"/>
+
+</form>
